@@ -16,7 +16,7 @@ const Home = () => {
     const [products, setProducts] = useState([])
 
     useEffect(()=>{
-        axios.get('http://localhost:5000/products')
+        axios.get('https://calm-beach-65269.herokuapp.com/products')
         .then(Response => {
          setProducts(Response.data);
          setLoading(false)

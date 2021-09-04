@@ -38,7 +38,7 @@ const AddProduct = () => {
             return swal("image is uplodeing...", "please wait some seconds", "info")
         }
         
-        axios.post('http://localhost:5000/addProduct', ProductInfo )
+        axios.post('https://calm-beach-65269.herokuapp.com/addProduct', ProductInfo )
         .then(response => response.data &&  swal("Successfully Added", "Your product is successfully added!", "success"))
         .then(err => console.log(err));
     

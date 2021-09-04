@@ -9,11 +9,11 @@ const Checkout = () => {
    const {loggedInUser}= useContext(UserContext);
    const{cart}=useContext(UserContext);
 
-   axios.post('http://localhost:5000/addOrder')
+   axios.post('https://calm-beach-65269.herokuapp.com/addOrder')
 
    const handleCheckout = () => {
        const orderInfo ={...loggedInUser, product: cart, orderTime: new Date()};
-       axios.post('http://localhost:5000/addOrder',orderInfo )
+       axios.post('https://calm-beach-65269.herokuapp.com/addOrder',orderInfo )
        .then(Response=> {
            Response.data ? swal("Order placed successfully", "Your order placed successfully!", "success"): alert("something wrong try again");
        })
