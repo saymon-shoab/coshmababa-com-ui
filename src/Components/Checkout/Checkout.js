@@ -15,10 +15,10 @@ const Checkout = () => {
        const orderInfo ={...loggedInUser, product: cart, orderTime: new Date()};
        axios.post('https://calm-beach-65269.herokuapp.com/addOrder',orderInfo )
        .then(Response=> {
-           Response.data ? swal("Order placed successfully", "Your order placed successfully!", "success"): alert("something wrong try again");
+           Response.data && swal( "Your order placed successfully!");
        })
        .catch(error =>{
-           console.log(error)
+        swal(error)
        })
    }
 
