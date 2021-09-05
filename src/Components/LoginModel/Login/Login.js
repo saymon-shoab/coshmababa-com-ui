@@ -119,7 +119,7 @@ const handleSignUp = (e) => {
           newUserInfo.error = "";
           newUserInfo.success =true;
           setUser(newUserInfo);
-          updateUserName(user.name)
+          updateUserName(newUserInfo)
         
           // ...
         })
@@ -149,14 +149,14 @@ const handleSignIn = (e) => {
         .then((res) => {
           // Signed in
           toast.dismiss(loading)
-                          handleResponse(res)
+          handleResponse(res)
           const newUserInfo = {...user};
           newUserInfo.error = "";
           newUserInfo.success =true;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
        
-          history.replace(from);
+        //   history.replace(from);
          
           // ...
         })
@@ -189,34 +189,12 @@ const updateUserName = name =>{
   }
 
   const handleResponse = (res) => {
-    setLoggedInUser(res);
+    // setLoggedInUser(res);
     // setJWTToken();
     setShowModal(false);
     history.replace(from);
-    toast.success('Successfully Logged In!');
-    if (res.email === "test@admin.com") {
-        swal({
-            title: "Warning!",
-            content: (
-                <p>
-                    You have entered the admin panel for testing.
-                    <br />
-                    <b>Please do not abuse this facility!</b>
-                </p>
-            ),
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then(ok => {
-            if (!ok) {
-                handleSignOut()
-                    .then(res => {
-                        setLoggedInUser(res)
-                        toast.error('Logged Out!');
-                    })
-            }
-        });
-    }
+    // toast.success('Successfully Logged In!');
+  
 }
 
     return (
@@ -237,11 +215,11 @@ const updateUserName = name =>{
                     <form onSubmit={handleSignIn} >
                         <label>
                             <span>Email</span>
-                            <input onBlur={handleBlur} value="test@admin.com" name="email"  type="email"  required  />
+                            <input onBlur={handleBlur}  name="email"  type="email"  required  />
                         </label>
                         <label>
                             <span>Password</span>
-                            <input  onBlur={handleBlur} value="admin123456" name="password"  type="password"   required />
+                            <input  onBlur={handleBlur}   name="password"  type="password"   required />
                         </label>
                         <p className="forgot-pass">Forgot password?</p>
                         <button type="submit" className="submit">Sign In</button>
@@ -284,6 +262,7 @@ const updateUserName = name =>{
                     </div>
                 </div>
             </div>
+            < Toaster />
             {/* { user.success &&
              
              swal(<p style={{color:'green'}}>User {newUser ?"created" : "logged In"} successfully</p>)
