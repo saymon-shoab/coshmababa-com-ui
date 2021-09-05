@@ -46,7 +46,7 @@ const Login = () => {
         firebase.auth().signInWithPopup(provider)
         .then(res=>{
              toast.dismiss(loading);
-             handleResponse(res)
+            //  handleResponse(res)
             let {displayName,photoURL,email}=res.user
             const signedInUser ={
                 isSignedIn:true,
@@ -103,6 +103,7 @@ const Login = () => {
           const newUserInfo = {...user}
           newUserInfo[event.target.name] = event.target.value;
           setUser(newUserInfo)
+          setLoggedInUser(newUserInfo)
         }
         
     }
@@ -110,16 +111,20 @@ const Login = () => {
 const handleSignUp = (e) => {
     const loading = toast.loading('Please wait...');
 
-    if(newUser && user.email && user.password){
-        firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+    if(newUser  && user.email && user.password){
+        firebase.auth().createUserWithEmailAndPassword( user.email, user.password)
         .then((res) => {
             toast.dismiss(loading)
+            toast.success('Successfully Create an user !');
+            console.log(res)
             handleResponse(res)
+           
           const newUserInfo = {...user};
           newUserInfo.error = "";
           newUserInfo.success =true;
-          setUser(newUserInfo);
           updateUserName(newUserInfo)
+          setUser(newUserInfo);
+         setLoggedInUser(newUserInfo)
         
           // ...
         })
@@ -132,7 +137,7 @@ const handleSignUp = (e) => {
           newUserInfo.error = error.message
           newUserInfo.success=false;
          setUser(newUserInfo)
-        
+        setLoggedInUser(newUserInfo)
           // ..
         });
        }
@@ -148,7 +153,9 @@ const handleSignIn = (e) => {
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then((res) => {
           // Signed in
+          console.log(res)
           toast.dismiss(loading)
+          toast.success('Successfully Logged In!');
           handleResponse(res)
           const newUserInfo = {...user};
           newUserInfo.error = "";
@@ -156,7 +163,7 @@ const handleSignIn = (e) => {
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
        
-        //   history.replace(from);
+          history.replace(from);
          
           // ...
         })
@@ -168,6 +175,7 @@ const handleSignIn = (e) => {
           newUserInfo.error = error.message
           newUserInfo.success=false;
          setUser(newUserInfo)
+         setLoggedInUser(newUserInfo)
         });
        }
        e.preventDefault();
@@ -175,7 +183,7 @@ const handleSignIn = (e) => {
 
 const updateUserName = name =>{
     const user = firebase.auth().currentUser;
-  
+   
     user.updateProfile({
       displayName: "Jane Q. User",
     }).then(() => {
@@ -189,11 +197,11 @@ const updateUserName = name =>{
   }
 
   const handleResponse = (res) => {
-    // setLoggedInUser(res);
+    setLoggedInUser(res);
     // setJWTToken();
     setShowModal(false);
     history.replace(from);
-    // toast.success('Successfully Logged In!');
+    
   
 }
 

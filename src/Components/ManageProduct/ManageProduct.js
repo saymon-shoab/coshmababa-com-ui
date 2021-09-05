@@ -27,16 +27,16 @@ const ManageProduct = () => {
             })
     }, [])
 
-    const handleDeleteItem = () => {
-        // const removedItems = items.filter(item => item._id !== id);
+    const handleDeleteItem = (id) => {
+        const removedItems = items.filter(item => item._id !== id);
 
-        // axios.delete(`https://calm-beach-65269.herokuapp.com/delete/${id}`)
-        //     .then(response => {
-        //         response && setItems(removedItems);;
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
+        axios.delete(`https://calm-beach-65269.herokuapp.com/delete/${id}`)
+            .then(response => {
+                response && setItems(removedItems);;
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
 
@@ -47,6 +47,8 @@ const ManageProduct = () => {
                 <Table hover borderless responsive>
                 <thead className="bg-light">
                    <tr>
+                   <th>Product Picture</th>
+
                        <th>Product Name</th>
                        <th>Product Price</th>
                        <th>Action</th> 

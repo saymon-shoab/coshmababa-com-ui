@@ -30,7 +30,7 @@ const Header = () => {
         <Nav.Link as={Link} className="mr-4" active style={{ fontWeight: "650" }} to="/admin">Admin</Nav.Link>
      
       
-{   loggedInUser?.isSignedIn?  <Nav.Link as={Link} className="mr-4" active style={{ fontWeight: "650" }} > <strong>{loggedInUser.name || loggedInUser.email}</strong></Nav.Link>
+{   loggedInUser?.isSignedIn?  <Nav.Link as={Link} className="mr-4" active style={{ fontWeight: "650" }} > <strong>{loggedInUser.name }</strong></Nav.Link>
       :<Nav.Link as={Link} className="mr-4" active style={{ fontWeight: "650" }} to="/login">SignUp</Nav.Link>
 
       }
